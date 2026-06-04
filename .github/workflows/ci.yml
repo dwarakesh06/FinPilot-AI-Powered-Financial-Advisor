@@ -20,7 +20,7 @@ jobs:
           cache-dependency-path: backend/package-lock.json
       - name: Install Dependencies
         working-directory: ./backend
-        run: npm ci
+        run: npm install
       - name: Run Tests
         working-directory: ./backend
         run: npm test
@@ -38,7 +38,7 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install Dependencies
         working-directory: ./frontend
-        run: npm ci
+        run: npm install
       - name: Build
         working-directory: ./frontend
         run: npm run build
