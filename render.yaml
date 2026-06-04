@@ -1,13 +1,13 @@
 services:
-  # Backend API Service
+  # Full-Stack Web Service
   - type: web
-    name: finpilot-api
+    name: finpilot-fullstack
     runtime: node
     region: oregon
     plan: free
-    rootDir: backend
-    buildCommand: npm install
-    startCommand: npm start
+    rootDir: .
+    buildCommand: npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: npm start --prefix backend
     envVars:
       - key: NODE_ENV
         value: production
@@ -17,25 +17,6 @@ services:
         sync: false
       - key: CSRF_SECRET
         sync: false
-      - key: CORS_ORIGIN
-        sync: false
       - key: JWT_EXPIRES_IN
         value: 7d
     healthCheckPath: /health
-
-  # Frontend Static Site
-  - type: web
-    name: finpilot-frontend
-    runtime: static
-    region: oregon
-    plan: free
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
-      - key: VITE_API_URL
-        sync: false
