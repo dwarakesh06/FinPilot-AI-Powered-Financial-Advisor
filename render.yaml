@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: finpilot-api
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CSRF_SECRET
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+    healthCheckPath: /health
