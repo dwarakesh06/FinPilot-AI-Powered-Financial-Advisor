@@ -27,7 +27,10 @@ initCronJobs();
 const app = express();
 
 // Security Middlewares
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginEmbedderPolicy: false
+}));
 app.use(mongoSanitize());
 
 // Rate Limiting (100 requests per 15 minutes per IP)
